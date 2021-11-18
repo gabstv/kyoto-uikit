@@ -2,7 +2,6 @@ package twui
 
 import (
 	"embed"
-	"fmt"
 	"html/template"
 	"io"
 	"os"
@@ -24,7 +23,7 @@ func ExtractTemplates(targetPath string) error {
 		return err
 	}
 	for _, filex := range files {
-		fmt.Println("EXTRACTTEMPLATES:", filex.Name())
+		// fmt.Println("EXTRACTTEMPLATES:", filex.Name())
 		if filex.IsDir() {
 			continue
 		}

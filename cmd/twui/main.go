@@ -104,9 +104,9 @@ dist
 		}
 
 		cmd := exec.Command("yarn", "--yes")
-		x, err := cmd.CombinedOutput()
-		fmt.Println(x)
-		if err != nil {
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		if err := cmd.Run(); err != nil {
 			fmt.Println(err.Error())
 			return
 		}
