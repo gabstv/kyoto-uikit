@@ -2,6 +2,7 @@ package twui
 
 import (
 	"embed"
+	"fmt"
 	"html/template"
 	"io"
 	"os"
@@ -26,6 +27,10 @@ func ExtractTemplates(targetPath string) error {
 		if filex.IsDir() {
 			continue
 		}
+		if filex.Name() == "/" {
+			continue
+		}
+		fmt.Println("EXTRACTTEMPLATES:", filex.Name())
 		f, err := templates.Open(filex.Name())
 		if err != nil {
 			return err
