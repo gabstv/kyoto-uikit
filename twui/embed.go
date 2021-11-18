@@ -23,7 +23,9 @@ func ExtractTemplates(targetPath string) error {
 		return err
 	}
 	for _, filex := range files {
-		filex.Name()
+		if filex.IsDir() {
+			continue
+		}
 		f, err := templates.Open(filex.Name())
 		if err != nil {
 			return err
