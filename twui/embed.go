@@ -19,18 +19,18 @@ func IncludeTemplates(tpl *template.Template) (*template.Template, error) {
 }
 
 func ExtractTemplates(targetPath string) error {
-	files, err := templates.ReadDir("/")
+	files, err := templates.ReadDir(".")
 	if err != nil {
 		return err
 	}
 	for _, filex := range files {
+		fmt.Println("EXTRACTTEMPLATES:", filex.Name())
 		if filex.IsDir() {
 			continue
 		}
-		if filex.Name() == "/" {
+		if filex.Name() == "/" || filex.Name() == "" {
 			continue
 		}
-		fmt.Println("EXTRACTTEMPLATES:", filex.Name())
 		f, err := templates.Open(filex.Name())
 		if err != nil {
 			return err
