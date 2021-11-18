@@ -27,7 +27,9 @@
 The easiest way to install for now, because it handles templates as well
 
 ```sh
-go get github.com/gabstv/kyoto-uikit/twui@master
+go install github.com/gabstv/kyoto-uikit/cmd/twui@v0.1.0
+# will create the tailwindcss required files on ./static
+go run github.com/gabstv/kyoto-uikit/cmd/twui@v0.1.0 ./static
 ```
 
 ```go
