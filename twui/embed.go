@@ -9,7 +9,7 @@ import (
 )
 
 //go:embed *.html
-var templates *embed.FS
+var templates embed.FS
 
 // IncludeTemplates will add all *.html template files of twui.
 // Make sure to call `tpl = tpl.Funcs(kyoto.TFuncMap())` first.
