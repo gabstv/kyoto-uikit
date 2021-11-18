@@ -5,6 +5,8 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+
+	"github.com/gabstv/kyoto-uikit/twui"
 )
 
 var taiwindconfig = []byte(`const colors = require('tailwindcss/colors')
@@ -43,6 +45,10 @@ func main() {
 	}
 	staticf := os.Args[1]
 	os.MkdirAll(filepath.Join(staticf, ".twui"), 0744)
+	if err := twui.ExtractTemplates(filepath.Join(staticf, ".twui")); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 	if _, err := os.Stat(filepath.Join(staticf, ".gitignore")); os.IsNotExist(err) {
 		ignored := []byte(`node_modules/
 dist
