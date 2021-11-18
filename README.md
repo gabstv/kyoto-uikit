@@ -8,6 +8,8 @@
     UIKit for rapid development
 </p>
 
+### This is a fork of yuriizinets/kyoto-uikit that uses go:embed and go mod instead of git submodules.
+
 ![License](https://img.shields.io/github/license/yuriizinets/kyoto-uikit)
 [![Go Reference](https://pkg.go.dev/badge/github.com/yuriizinets/kyoto.svg)](https://pkg.go.dev/github.com/yuriizinets/kyoto)
 [![Go Report Card](https://goreportcard.com/badge/github.com/yuriizinets/kyoto-uikit)](https://goreportcard.com/report/github.com/yuriizinets/kyoto-uikit)
@@ -22,20 +24,35 @@
 
 ## Installation
 
-### Git submodule
-
 The easiest way to install for now, because it handles templates as well
 
-- Add repo as git submodule to your app: `git submodule add https://github.com/yuriizinets/kyoto-uikit.git uikit`
-- (twui only) Add replace directive to your `go.mod` file: `github.com/yuriizinets/kyoto-uikit/twui => ./uikit/twui`
-- (twui only) Add twui path to tailwind config file for JIT mode
+```sh
+go get github.com/gabstv/kyoto-uikit/twui@master
+```
+
+```go
+
+import (
+    "html/template"
+
+    "github.com/gabstv/kyoto-uikit/twui"
+)
+
+func mktemplate(page string) *template.Template {
+    t := template.New(page)
+	t = t.Funcs(kyoto.TFuncMap())
+	t, _ = t.ParseGlob("*.html")
+    t, _ = twui.IncludeTemplates(t) // this will include all twui templates
+    return t
+}
+
+```
 
 ### Go package + templates
 
 `<kit>` - component library you want to use
 
-- Install Go package into your project with `go get github.com/yuriizinets/kyoto-uikit/<kit>`
-- Manually copy all `<kit>/*.html` files to your templates directory
+- Install Go package into your project with `go get github.com/gabstv/kyoto-uikit/<kit>`
 
 ## Example
 
